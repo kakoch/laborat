@@ -1,55 +1,46 @@
-package com.laborat.laborat.models.entities;
+package com.laborat.laborat.dtos;
 import java.util.Date;
 
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.laborat.laborat.models.entities.LoteCard;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "analises_lote_cartao")
-public class CardAnalysis {
+public class CardAnalysisDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "lote_de_cartao_id")
     private LoteCard loteDeCartaoFornecedor;
-
-    @Column(nullable = false)
     private Date dataAnalise;
-    @Column(nullable = false)
     private Double amostraEspessura;
-    @CreatedDate
     private Date dataRegistro; 
-    @CreatedBy
     private String registradoPor; 
-    
     private String editadoPor; 
     private Date dataEdicao;
     
-    public CardAnalysis() {};
+    public CardAnalysisDTO() {};
     
-	public CardAnalysis(Long id, LoteCard loteDeCartaoFornecedor, Date dataAnalise, Double amostraEspessura,
-			Date dataRegistro, String registradoPor, String editadoPor, Date dataEdicao) {
-		super();
-		this.id = id;
-		this.loteDeCartaoFornecedor = loteDeCartaoFornecedor;
-		this.dataAnalise = dataAnalise;
-		this.amostraEspessura = amostraEspessura;
-		this.dataRegistro = dataRegistro;
-		this.registradoPor = registradoPor;
-		this.editadoPor = editadoPor;
-		this.dataEdicao = dataEdicao;
-	}
+    @JsonCreator
+    public CardAnalysisDTO(@JsonProperty("id") Long id, 
+                           @JsonProperty("loteDeCartaoFornecedor") LoteCard loteDeCartaoFornecedor, 
+                           @JsonProperty("dataAnalise") Date dataAnalise, 
+                           @JsonProperty("amostraEspessura") Double amostraEspessura,
+                           @JsonProperty("dataRegistro") Date dataRegistro, 
+                           @JsonProperty("registradoPor") String registradoPor, 
+                           @JsonProperty("editadoPor") String editadoPor, 
+                           @JsonProperty("dataEdicao") Date dataEdicao) {
+        this.id = id;
+        this.loteDeCartaoFornecedor = loteDeCartaoFornecedor;
+        this.dataAnalise = dataAnalise;
+        this.amostraEspessura = amostraEspessura;
+        this.dataRegistro = dataRegistro;
+        this.registradoPor = registradoPor;
+        this.editadoPor = editadoPor;
+        this.dataEdicao = dataEdicao;
+    }
 	public Long getId() {
 		return id;
 	}
@@ -80,7 +71,7 @@ public class CardAnalysis {
 	public void setDataRegistro(Date dataRegistro) {
 		this.dataRegistro = dataRegistro;
 	}
-
+	
 	public String getEditadoPor() {
 		return editadoPor;
 	}

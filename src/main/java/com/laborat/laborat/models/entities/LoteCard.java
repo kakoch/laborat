@@ -2,6 +2,11 @@ package com.laborat.laborat.models.entities;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+
+import com.laborat.laborat.repositories.CardAnalysisRepository;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,9 +47,11 @@ public class LoteCard {
     @Column(nullable = false)
     private Date dataValidade;
     
+    @CreatedDate
     @Column(nullable = false)
     private Date dataRegistro; 
     
+    @CreatedBy
     @Column(nullable = false)
     private String quemRegistrou; 
     
@@ -53,6 +60,30 @@ public class LoteCard {
 
     @OneToMany(mappedBy = "loteDeCartaoFornecedor", cascade = CascadeType.ALL)
     private List<CardAnalysis> analises;
+    
+    public LoteCard() {}
+    
+	public LoteCard(Long id, String loteInternoLaboratorio, String loteCartaoFornecedor, String nomeFornecedor,
+			String nomeCartao, double gramaturaCartao, double gramaturaMinima, double gramaturaMaxima,
+			Date dataProducao, Date dataValidade, Date dataRegistro, String quemRegistrou, String editadoPor,
+			Date dataEdicao, List<CardAnalysis> analises) {
+		super();
+		this.id = id;
+		this.loteInternoLaboratorio = loteInternoLaboratorio;
+		this.loteCartaoFornecedor = loteCartaoFornecedor;
+		this.nomeFornecedor = nomeFornecedor;
+		this.nomeCartao = nomeCartao;
+		this.gramaturaCartao = gramaturaCartao;
+		this.gramaturaMinima = gramaturaMinima;
+		this.gramaturaMaxima = gramaturaMaxima;
+		this.dataProducao = dataProducao;
+		this.dataValidade = dataValidade;
+		this.dataRegistro = dataRegistro;
+		this.quemRegistrou = quemRegistrou;
+		this.editadoPor = editadoPor;
+		this.dataEdicao = dataEdicao;
+		this.analises = analises;
+	}
 
 	public Long getId() {
 		return id;
@@ -166,7 +197,7 @@ public class LoteCard {
 		this.dataEdicao = dataEdicao;
 	}
 
-	public List<CardAnalysis> getAnalises() {
+	public List<CardAnalysis> getAnalises(CardAnalysisRepository cardAnalysisRepository) {
 		return analises;
 	}
 
