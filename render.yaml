@@ -3,5 +3,5 @@
 services:
   - name: laborat
     type: web
-    buildCommand: mvn clean install
-    startCommand: java -jar target/laborat.jar
+    buildCommand: ./mvnw clean install
+    startCommand: ./mvnw spring-boot:run
