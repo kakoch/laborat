@@ -1,0 +1,7 @@
+# render.yaml
+
+services:
+  - name: laborat
+    type: web
+    buildCommand: mvn clean install
+    startCommand: java -jar target/laborat.jar
