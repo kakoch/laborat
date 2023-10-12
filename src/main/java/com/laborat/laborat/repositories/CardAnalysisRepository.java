@@ -26,4 +26,6 @@ public interface CardAnalysisRepository extends JpaRepository<CardAnalysis, Long
 	@Query("SELECT ca FROM CardAnalysis ca WHERE ca.id = :id")
 	Optional<CardAnalysis> findById(@Param("id") Long id);
 	
+	 String sql_gramaturas = "SELECT CAST(ca.id AS bigint), ca.amostra_espessura, ca.data_analise, ca.data_edicao, ca.data_registro, ca.editado_Por, CAST(alc.valor AS Integer) FROM analises_lote_cartao ca LEFT JOIN amostras_lote_cartao alc ON ca.amostra_gramatura_id = alc.id";
+
 }

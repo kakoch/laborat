@@ -1,10 +1,13 @@
 package com.laborat.laborat.models.entities;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,6 +31,12 @@ public class CardAnalysis {
     private Date dataAnalise;
     @Column(nullable = false)
     private Double amostraEspessura;
+    
+    @ElementCollection
+    @CollectionTable(name = "amostras_lote_cartao", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "valor")
+    private List<Double> amostrasGramatura;
+    
     @CreatedDate
     private Date dataRegistro; 
     @CreatedBy
@@ -38,13 +47,14 @@ public class CardAnalysis {
     
     public CardAnalysis() {};
     
-	public CardAnalysis(Long id, LoteCard loteDeCartaoFornecedor, Date dataAnalise, Double amostraEspessura,
+	public CardAnalysis(Long id, LoteCard loteDeCartaoFornecedor, Date dataAnalise, Double amostraEspessura, List<Double> amostrasGramatura,
 			Date dataRegistro, String registradoPor, String editadoPor, Date dataEdicao) {
 		super();
 		this.id = id;
 		this.loteDeCartaoFornecedor = loteDeCartaoFornecedor;
 		this.dataAnalise = dataAnalise;
 		this.amostraEspessura = amostraEspessura;
+		this.amostrasGramatura = amostrasGramatura;
 		this.dataRegistro = dataRegistro;
 		this.registradoPor = registradoPor;
 		this.editadoPor = editadoPor;
@@ -100,7 +110,16 @@ public class CardAnalysis {
 
 	public void setRegistradoPor(String registradoPor) {
 		this.registradoPor = registradoPor;
-	} 
-    
+	}
+
+	public List<Double> getAmostrasGramatura() {
+		return amostrasGramatura;
+	}
+
+	public void setAmostrasGramatura(List<Double> amostrasGramatura) {
+		this.amostrasGramatura = amostrasGramatura;
+	}
+
+	    
     
 }

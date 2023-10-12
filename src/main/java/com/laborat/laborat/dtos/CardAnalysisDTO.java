@@ -1,5 +1,6 @@
 package com.laborat.laborat.dtos;
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,6 +17,7 @@ public class CardAnalysisDTO {
     private LoteCard loteDeCartaoFornecedor;
     private Date dataAnalise;
     private Double amostraEspessura;
+    private List<Double> amostrasGramatura;
     private Date dataRegistro; 
     private String registradoPor; 
     private String editadoPor; 
@@ -28,6 +30,7 @@ public class CardAnalysisDTO {
                            @JsonProperty("loteDeCartaoFornecedor") LoteCard loteDeCartaoFornecedor, 
                            @JsonProperty("dataAnalise") Date dataAnalise, 
                            @JsonProperty("amostraEspessura") Double amostraEspessura,
+                           @JsonProperty("amostrasGramatura") List<Double> amostrasGramatura,
                            @JsonProperty("dataRegistro") Date dataRegistro, 
                            @JsonProperty("registradoPor") String registradoPor, 
                            @JsonProperty("editadoPor") String editadoPor, 
@@ -36,6 +39,7 @@ public class CardAnalysisDTO {
         this.loteDeCartaoFornecedor = loteDeCartaoFornecedor;
         this.dataAnalise = dataAnalise;
         this.amostraEspessura = amostraEspessura;
+        this.amostrasGramatura = amostrasGramatura;
         this.dataRegistro = dataRegistro;
         this.registradoPor = registradoPor;
         this.editadoPor = editadoPor;
@@ -91,6 +95,14 @@ public class CardAnalysisDTO {
 
 	public void setRegistradoPor(String registradoPor) {
 		this.registradoPor = registradoPor;
+	}
+
+	public List<Double> getAmostrasGramatura() {
+		return amostrasGramatura;
+	}
+
+	public void setAmostrasGramatura(List<Double> amostrasGramatura) {
+		this.amostrasGramatura = amostrasGramatura;
 	} 
     
     
